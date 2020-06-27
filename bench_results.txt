@@ -1,0 +1,56 @@
+amd64
+=====
+
+
+$ cargo bench
+   Compiling convolution v0.1.0 (/mnt/c/Users/michael/convolution)
+    Finished bench [optimized] target(s) in 1.00s
+     Running target/release/deps/convolution-c1c5475f2730ab37
+
+running 12 tests
+test tests::test_re_re_conv_bjorn3 ... ignored
+test tests::test_re_re_conv_dodomorandi ... ignored
+test tests::test_re_re_conv_pcpthm ... ignored
+test tests::test_re_re_conv_zocog_fast ... ignored
+test tests::test_re_re_conv_zocog_safe ... ignored
+test tests::test_re_re_conv_zso ... ignored
+test tests::bench_re_re_conv_bjorn3      ... bench:      11,668 ns/iter (+/- 493)
+test tests::bench_re_re_conv_dodomorandi ... bench:       8,443 ns/iter (+/- 377)
+test tests::bench_re_re_conv_pcpthm      ... bench:       5,140 ns/iter (+/- 367)
+test tests::bench_re_re_conv_zicog_fast  ... bench:       4,104 ns/iter (+/- 1,406)
+test tests::bench_re_re_conv_zicog_safe  ... bench:       8,261 ns/iter (+/- 181)
+test tests::bench_re_re_conv_zso         ... bench:      26,398 ns/iter (+/- 999)
+
+test result: ok. 0 passed; 0 failed; 6 ignored; 6 measured; 0 filtered out
+
+     Running target/release/deps/convolution-a2adfaed6cae7da1
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+
+
+aarch64
+=======
+$ cargo bench
+...
+test tests::test_re_re_conv_alice ... ignored
+test tests::test_re_re_conv_bjorn3 ... ignored
+test tests::test_re_re_conv_dodomorandi ... ignored
+test tests::test_re_re_conv_pcpthm ... ignored
+test tests::test_re_re_conv_zicog ... ignored
+test tests::test_re_re_conv_zicog_fast ... ignored
+test tests::test_re_re_conv_zicog_safe ... ignored
+test tests::test_re_re_conv_zso ... ignored
+test tests::bench_re_re_conv_alice       ... bench:      23,919 ns/iter (+/- 123)
+test tests::bench_re_re_conv_bjorn3      ... bench:      48,014 ns/iter (+/- 124)
+test tests::bench_re_re_conv_dodomorandi ... bench:      57,550 ns/iter (+/- 810)
+test tests::bench_re_re_conv_pcpthm      ... bench:      24,320 ns/iter (+/- 97)
+test tests::bench_re_re_conv_zicog       ... bench:      23,473 ns/iter (+/- 92)
+test tests::bench_re_re_conv_zicog_fast  ... bench:      23,438 ns/iter (+/- 77)
+test tests::bench_re_re_conv_zicog_safe  ... bench:      57,850 ns/iter (+/- 226)
+test tests::bench_re_re_conv_zso         ... bench:      62,344 ns/iter (+/- 184)
+...
+
+
+
