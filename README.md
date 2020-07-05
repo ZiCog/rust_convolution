@@ -2,8 +2,8 @@
 
 A simple 2d convolution in Rust. As fast as possible! 
 
-This is a collection of suggested Rust functions that were propesed as solutions to matching the performace of C.
-The suggestions come from repondandts to a question on the Rust user forum: "Rust performance help (convolution)"
+This is a collection of suggested Rust functions that were proposed as solutions to matching the performance of C.
+The suggestions come from repondents to a question on the Rust user forum: "Rust performance help (convolution)"
 : https://users.rust-lang.org/t/rust-performance-help-convolution/44075
 
 The problem is a simple 500 element convolution kernel run over a 20 million element data set. See convolution.c in the top level directory.
@@ -12,7 +12,7 @@ The Rust solutions are each held in modules named after their contributor on the
 
 ## Build and Run
 
-Build an run as a program that times the various solutions for the 20 miilion element convolution and prints the results:
+Build an run as a program that times the various solutions for the 20 million element convolution and prints the results:
 ```
     $ git clone https://github.com/ZiCog/rust_convolution/edit/master/README.md
     $ cd rust_convolution
@@ -68,9 +68,9 @@ test tests::bench_zso_convolution_ffi        ... bench:       4,667 ns/iter (+/-
 
 ## Commentary:
 
-1) Many people suggested differnet Rust "functional" style approaches to this problem. Some of them invloving use of "unsafe". It turns out that for single thread perfromance the normal procedural style I wrote naively from the C example is the fastest by a wide margin. Beware of those who suggest functional style and/or "unsafe" to get performance in Rust, it is not true!
+1) Many people suggested different Rust "functional" style approaches to this problem. Some of them involving use of "unsafe". It turns out that for single thread performance the normal procedural style I wrote naively from the C example is the fastest by a wide margin. Beware of those who suggest functional style and/or "unsafe" to get performance in Rust, it is not true!
 
-2) The fastest "functioanl" style solution, by alice, matches my procedural effort. It is also pure poetry. So short, sweet and to the point compared to all the others.
+2) The fastest "functional" style solution, by alice, matches my procedural effort. It is also pure poetry. So short, sweet and to the point compared to all the others.
 
 3) For multi-core parallelism alice's functional style wins hands down. And it is only a 4 character change to the source to parallelize it!
 
