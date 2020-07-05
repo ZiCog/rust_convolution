@@ -1,10 +1,21 @@
 use convolution::*;
 use instant::*;
 
-const SAMPLELEN: usize = 20_000_000;
-const COEFFLEN: usize = 500;
+const SAMPLELEN: usize = 20_000_000 + 4; // avx test N*6
+const COEFFLEN: usize = 500 + 4;         // avx test N*8
 
 use crate::pcg::*;
+
+fn testfn(tfn: fn(&[f32], &[f32]) -> Vec<f32>, sample: &[f32], coeff: &[f32], comment: &str) {
+    let now = Instant::now();
+    let result = tfn(&sample, &coeff);
+    println!(
+        "{:<30}Duration {}ms",
+        comment,
+        now.elapsed().as_millis()
+    );
+    println!("{}  {}", result[0], result[SAMPLELEN - COEFFLEN]);
+}
 
 fn main() {
     let mut pcg32 = Pcg32::new();
@@ -19,83 +30,21 @@ fn main() {
         *c = pcg32.frand();
     }
 
-    let now = Instant::now();
-    let result = zso::convolution(&sample, &coeff);
-    println!(
-        "zso::convolution:            Duration {}ms",
-        now.elapsed().as_millis()
-    );
-    println!("{}  {}", result[0], result[SAMPLELEN - COEFFLEN]);
+    testfn(zso::convolution,         &sample, &coeff, "zso::convolution:");
+    testfn(zso::convolution_ffi,     &sample, &coeff, "zso::convolution_ffi:");
+    testfn(zso::convolution_ffi_vreg,&sample, &coeff, "zso::convolution_ffi_vreg:");
+    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    if is_x86_feature_detected!("avx") {
+       testfn(zso::convolution_ffi_avx, &sample, &coeff, "zso::convolution_ffi_avx:");
+    }
+    testfn(bjorn3::convolution,      &sample, &coeff, "bjorn3::convolution:");
+    testfn(dodomorandi::convolution, &sample, &coeff, "dodomorandi::convolution:");
+    testfn(pcpthm::convolution,      &sample, &coeff, "pcpthm::convolution:");
 
-    let now = Instant::now();
-    let result = zso::convolution_ffi(&sample, &coeff);
-    println!(
-        "zso::convolution_ffi:        Duration {}ms",
-        now.elapsed().as_millis()
-    );
-    println!("{}  {}", result[0], result[SAMPLELEN - COEFFLEN]);
+    testfn(zicog::convolution,       &sample, &coeff, "zicog::convolution:");
+    testfn(zicog::convolution_fast,  &sample, &coeff, "zicog::convolution_fast:");
+    testfn(zicog::convolution_safe,  &sample, &coeff, "zicog::convolution_safe:");
 
-    let now = Instant::now();
-    let result = bjorn3::convolution(&sample, &coeff);
-    println!(
-        "bjorn3::convolution:         Duration {}ms",
-        now.elapsed().as_millis()
-    );
-    println!("{}  {}", result[0], result[SAMPLELEN - COEFFLEN]);
-
-    let now = Instant::now();
-    let result = dodomorandi::convolution(&sample, &coeff);
-    println!(
-        "dodomorandi::convolution:    Duration {}ms",
-        now.elapsed().as_millis()
-    );
-    println!("{}  {}", result[0], result[SAMPLELEN - COEFFLEN]);
-
-    let now = Instant::now();
-    let result = pcpthm::convolution(&sample, &coeff);
-    println!(
-        "pcpthm::convolution:         Duration {}ms",
-        now.elapsed().as_millis()
-    );
-    println!("{}  {}", result[0], result[SAMPLELEN - COEFFLEN]);
-
-    let now = Instant::now();
-    let result = zicog::convolution(&sample, &coeff);
-    println!(
-        "zicog::convolution:          Duration {}ms",
-        now.elapsed().as_millis()
-    );
-    println!("{}  {}", result[0], result[SAMPLELEN - COEFFLEN]);
-
-    let now = Instant::now();
-    let result = zicog::convolution_fast(&sample, &coeff);
-    println!(
-        "zicog::convolution_fast:     Duration {}ms",
-        now.elapsed().as_millis()
-    );
-    println!("{}  {}", result[0], result[SAMPLELEN - COEFFLEN]);
-
-    let now = Instant::now();
-    let result = zicog::convolution_safe(&sample, &coeff);
-    println!(
-        "zicog::convolution_safe:     Duration {}ms",
-        now.elapsed().as_millis()
-    );
-    println!("{}  {}", result[0], result[SAMPLELEN - COEFFLEN]);
-
-    let now = Instant::now();
-    let result = alice::convolution_serial(&sample, &coeff);
-    println!(
-        "alice::convolution_serial:   Duration {}ms",
-        now.elapsed().as_millis()
-    );
-    println!("{}  {}", result[0], result[SAMPLELEN - COEFFLEN]);
-
-    let now = Instant::now();
-    let result = alice::convolution_parallel(&sample, &coeff);
-    println!(
-        "alice::convolution_parallel: Duration {}ms",
-        now.elapsed().as_millis()
-    );
-    println!("{}  {}", result[0], result[SAMPLELEN - COEFFLEN]);
+    testfn(alice::convolution_serial,   &sample, &coeff, "alice::convolution_serial:");
+    testfn(alice::convolution_parallel, &sample, &coeff, "alice::convolution_parallel:");
 }
