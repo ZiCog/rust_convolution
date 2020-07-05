@@ -66,6 +66,15 @@ test tests::bench_zso_convolution            ... bench:      25,268 ns/iter (+/-
 test tests::bench_zso_convolution_ffi        ... bench:       4,667 ns/iter (+/- 149)
 ```
 
+## Comentory:
+
+1) Many people suggested differnet Rust "functional" style approaches to this problem. Some of them invloving use of "unsafe". It turns out that for single thread perfromance the normal procedural style I wrote naively from the C example is the fastest by a wide margin. Beware of those who suggest functional style and/or "unsafe" to get performance in Rust, it is not true!
+
+2) The fatsest "functioanl" style solution, by alice, matches my procedural effort. It is also pure poetry. So short, sweet and to the point compared to all the others.
+
+3) For multi-core parallelism alices functional style wins hands down. And it is only a 4 charcter change to the source to parallelize it!
+
+4) The parallel solution is painfully slow on small data sets, as shown in the benchmark figures.
 
 
 
