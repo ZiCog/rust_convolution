@@ -24,7 +24,7 @@ void convolution_c(float *out, int *out_length, const float *sample, int samplel
 
 void convolution_c_vreg(float *out, int *out_length, const float *sample, int samplelen, const float *coeff, int coefflen) {
     if (samplelen % 6 != 0) fprintf(stderr, "This algorythm good only if samplelen = N*6, remain: %d\n", samplelen%6);
-    if (coefflen % 4 != 0)  fprintf(stderr, "This algorythm good only if coefflen = N*8, remain: %d\n", coefflen%4);
+    if (coefflen % 4 != 0)  fprintf(stderr, "This algorythm good only if coefflen = N*4, remain: %d\n", coefflen%4);
     int outlen = samplelen - coefflen + 1;
     for (int i=0; i<outlen; i+=6) {
         VECTYPE acc0 = {0., 0., 0., 0.};
