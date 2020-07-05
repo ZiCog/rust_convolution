@@ -1,8 +1,8 @@
 use convolution::*;
 use instant::*;
 
-const SAMPLELEN: usize = 20_000_000;
-const COEFFLEN: usize = 500;
+const SAMPLELEN: usize = 20_000_000 + 4; // avx test N*6
+const COEFFLEN: usize = 500 + 4;         // avx test N*8
 
 use crate::pcg::*;
 
@@ -32,7 +32,11 @@ fn main() {
 
     testfn(zso::convolution,         &sample, &coeff, "zso::convolution:");
     testfn(zso::convolution_ffi,     &sample, &coeff, "zso::convolution_ffi:");
-
+    testfn(zso::convolution_ffi_vreg,&sample, &coeff, "zso::convolution_ffi_vreg:");
+    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    if is_x86_feature_detected!("avx") {
+       testfn(zso::convolution_ffi_avx, &sample, &coeff, "zso::convolution_ffi_avx:");
+    }
     testfn(bjorn3::convolution,      &sample, &coeff, "bjorn3::convolution:");
     testfn(dodomorandi::convolution, &sample, &coeff, "dodomorandi::convolution:");
     testfn(pcpthm::convolution,      &sample, &coeff, "pcpthm::convolution:");
