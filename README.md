@@ -19,14 +19,14 @@ Build an run as a program that times the various solutions for the 20 miilion el
     $ cargo run --release
 ```
 
-Or run the benchmarks which use a much smaller kerne and data set:
+Or run the benchmarks which use a much smaller kernel and data set:
 ```
     $ cargo bench
 ```
 
 ## Results
 
-The full convlution produces times like these on my Intel PC:
+The full convolution produces times like these on my Intel PC:
 
 ```
 zso::convolution:            Duration 24365ms
@@ -66,13 +66,13 @@ test tests::bench_zso_convolution            ... bench:      25,268 ns/iter (+/-
 test tests::bench_zso_convolution_ffi        ... bench:       4,667 ns/iter (+/- 149)
 ```
 
-## Comentory:
+## Commentary:
 
 1) Many people suggested differnet Rust "functional" style approaches to this problem. Some of them invloving use of "unsafe". It turns out that for single thread perfromance the normal procedural style I wrote naively from the C example is the fastest by a wide margin. Beware of those who suggest functional style and/or "unsafe" to get performance in Rust, it is not true!
 
-2) The fatsest "functioanl" style solution, by alice, matches my procedural effort. It is also pure poetry. So short, sweet and to the point compared to all the others.
+2) The fastest "functioanl" style solution, by alice, matches my procedural effort. It is also pure poetry. So short, sweet and to the point compared to all the others.
 
-3) For multi-core parallelism alices functional style wins hands down. And it is only a 4 charcter change to the source to parallelize it!
+3) For multi-core parallelism alice's functional style wins hands down. And it is only a 4 character change to the source to parallelize it!
 
 4) The parallel solution is painfully slow on small data sets, as shown in the benchmark figures.
 
