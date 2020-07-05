@@ -10,7 +10,7 @@ fn testfn(tfn: fn(&[f32], &[f32]) -> Vec<f32>, sample: &[f32], coeff: &[f32], co
     let now = Instant::now();
     let result = tfn(&sample, &coeff);
     println!(
-        "{}:            Duration {}ms",
+        "{:<30}Duration {}ms",
         comment,
         now.elapsed().as_millis()
     );
@@ -30,17 +30,17 @@ fn main() {
         *c = pcg32.frand();
     }
 
-    testfn(zso::convolution,         &sample, &coeff, "zso::convolution");
-    testfn(zso::convolution_ffi,     &sample, &coeff, "zso::convolution_ffi");
+    testfn(zso::convolution,         &sample, &coeff, "zso::convolution:");
+    testfn(zso::convolution_ffi,     &sample, &coeff, "zso::convolution_ffi:");
 
-    testfn(bjorn3::convolution,      &sample, &coeff, "bjorn3::convolution");
-    testfn(dodomorandi::convolution, &sample, &coeff, "dodomorandi::convolution");
-    testfn(pcpthm::convolution,      &sample, &coeff, "pcpthm::convolution");
+    testfn(bjorn3::convolution,      &sample, &coeff, "bjorn3::convolution:");
+    testfn(dodomorandi::convolution, &sample, &coeff, "dodomorandi::convolution:");
+    testfn(pcpthm::convolution,      &sample, &coeff, "pcpthm::convolution:");
 
-    testfn(zicog::convolution,       &sample, &coeff, "zicog::convolution");
-    testfn(zicog::convolution_fast,  &sample, &coeff, "zicog::convolution_fast");
-    testfn(zicog::convolution_safe,  &sample, &coeff, "zicog::convolution_safe");
+    testfn(zicog::convolution,       &sample, &coeff, "zicog::convolution:");
+    testfn(zicog::convolution_fast,  &sample, &coeff, "zicog::convolution_fast:");
+    testfn(zicog::convolution_safe,  &sample, &coeff, "zicog::convolution_safe:");
 
-    testfn(alice::convolution_serial,   &sample, &coeff, "alice::convolution_serial");
-    testfn(alice::convolution_parallel, &sample, &coeff, "alice::convolution_parallel");
+    testfn(alice::convolution_serial,   &sample, &coeff, "alice::convolution_serial:");
+    testfn(alice::convolution_parallel, &sample, &coeff, "alice::convolution_parallel:");
 }
