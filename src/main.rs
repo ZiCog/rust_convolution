@@ -4,20 +4,19 @@ use instant::*;
 const SAMPLELEN: usize = 20_000_000;
 const COEFFLEN: usize = 500;
 
-mod pcg;
-use pcg::*;
+use crate::pcg::*;
 
 fn main() {
     let mut pcg32 = Pcg32::new();
 
     let mut sample: Vec<f32> = vec![0.0; SAMPLELEN];
-    for i in 0..SAMPLELEN {
-        sample[i] = pcg32.frand();
+    for s in &mut sample {
+        *s = pcg32.frand();
     }
 
     let mut coeff: Vec<f32> = vec![0.0; COEFFLEN];
-    for i in 0..COEFFLEN {
-        coeff[i] = pcg32.frand();
+    for c in &mut coeff {
+        *c = pcg32.frand();
     }
 
     let now = Instant::now();
@@ -96,14 +95,6 @@ fn main() {
     let result = alice::convolution_parallel(&sample, &coeff);
     println!(
         "alice::convolution_parallel: Duration {}ms",
-        now.elapsed().as_millis()
-    );
-    println!("{}  {}", result[0], result[SAMPLELEN - COEFFLEN]);
-
-    let now = Instant::now();
-    let result = rusty_ron::re_re_conv_f32_compiletime(&sample, &coeff);
-    println!(
-        "rusty_ron::re_re_conv_f32_compiletime: Duration {}ms",
         now.elapsed().as_millis()
     );
     println!("{}  {}", result[0], result[SAMPLELEN - COEFFLEN]);
