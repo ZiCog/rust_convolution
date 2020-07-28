@@ -43,3 +43,15 @@ pub fn convolution_fast(sample: &[f32], coeff: &[f32]) -> Vec<f32> {
     }
     out
 }
+
+pub fn convolution_slow(sample: &[f32], coeff: &[f32]) -> Vec<f32> {
+    let mut out: Vec<f32> = vec![0.0; sample.len() - coeff.len() + 1];
+    for i in 0..out.len() {
+        let mut acc: FF32 = Fast(0.0);
+        for j in 0..coeff.len() {
+            acc += sample[i + j] * coeff[j];
+        }
+        out[i] = acc.get();
+    }
+    out
+}
