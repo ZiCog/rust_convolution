@@ -1,0 +1,100 @@
+Using a maximum of 1 threads
+zso::convolution:             Duration 34338ms
+122.28877  127.02979
+zso::convolution_ffi:         Duration 7272ms
+122.28871  127.029785
+zso::convolution_ffi_vreg:    Duration 2763ms
+122.28871  127.029785
+bjorn3::convolution:          Duration 28561ms
+122.2887  127.029785
+dodomorandi::convolution:     Duration 34221ms
+122.28877  127.02979
+pcpthm::convolution:          Duration 7325ms
+122.28871  127.029785
+zicog::convolution:           Duration 6893ms
+122.28871  127.029785
+zicog::convolution_fast:      Duration 6890ms
+122.28871  127.029785
+zicog::convolution_safe:      Duration 34246ms
+122.28877  127.02979
+zicog::convolution_slow:      Duration 34286ms
+122.28877  127.02979
+alice::convolution_serial:    Duration 7319ms
+122.28871  127.029785
+alice::convolution_parallel:  Duration 7473ms
+122.28871  127.029785
+Using a maximum of 2 threads
+zso::convolution:             Duration 34419ms
+122.28877  127.02979
+zso::convolution_ffi:         Duration 7253ms
+122.28871  127.029785
+zso::convolution_ffi_vreg:    Duration 2749ms
+122.28871  127.029785
+bjorn3::convolution:          Duration 28708ms
+122.2887  127.029785
+dodomorandi::convolution:     Duration 34223ms
+122.28877  127.02979
+pcpthm::convolution:          Duration 7318ms
+122.28871  127.029785
+zicog::convolution:           Duration 6886ms
+122.28871  127.029785
+zicog::convolution_fast:      Duration 6886ms
+122.28871  127.029785
+zicog::convolution_safe:      Duration 34251ms
+122.28877  127.02979
+zicog::convolution_slow:      Duration 34292ms
+122.28877  127.02979
+alice::convolution_serial:    Duration 7316ms
+122.28871  127.029785
+alice::convolution_parallel:  Duration 3690ms
+122.28871  127.029785
+Using a maximum of 3 threads
+zso::convolution:             Duration 34382ms
+122.28877  127.02979
+zso::convolution_ffi:         Duration 7285ms
+122.28871  127.029785
+zso::convolution_ffi_vreg:    Duration 2752ms
+122.28871  127.029785
+bjorn3::convolution:          Duration 28587ms
+122.2887  127.029785
+dodomorandi::convolution:     Duration 34210ms
+122.28877  127.02979
+pcpthm::convolution:          Duration 7312ms
+122.28871  127.029785
+zicog::convolution:           Duration 6880ms
+122.28871  127.029785
+zicog::convolution_fast:      Duration 6881ms
+122.28871  127.029785
+zicog::convolution_safe:      Duration 34236ms
+122.28877  127.02979
+zicog::convolution_slow:      Duration 34275ms
+122.28877  127.02979
+alice::convolution_serial:    Duration 7309ms
+122.28871  127.029785
+alice::convolution_parallel:  Duration 2531ms
+122.28871  127.029785
+Using a maximum of 4 threads
+zso::convolution:             Duration 34326ms
+122.28877  127.02979
+zso::convolution_ffi:         Duration 7250ms
+122.28871  127.029785
+zso::convolution_ffi_vreg:    Duration 2742ms
+122.28871  127.029785
+bjorn3::convolution:          Duration 28550ms
+122.2887  127.029785
+dodomorandi::convolution:     Duration 34217ms
+122.28877  127.02979
+pcpthm::convolution:          Duration 7312ms
+122.28871  127.029785
+zicog::convolution:           Duration 6881ms
+122.28871  127.029785
+zicog::convolution_fast:      Duration 6881ms
+122.28871  127.029785
+zicog::convolution_safe:      Duration 34244ms
+122.28877  127.02979
+zicog::convolution_slow:      Duration 34284ms
+122.28877  127.02979
+alice::convolution_serial:    Duration 7312ms
+122.28871  127.029785
+alice::convolution_parallel:  Duration 1857ms
+122.28871  127.029785
